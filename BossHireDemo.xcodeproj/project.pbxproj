@@ -29,19 +29,19 @@
 			containerPortal = E86E3B1D1D32461C00615718 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E86E3B241D32461C00615718;
-			remoteInfo = "BossHireDemo";
+			remoteInfo = BossHireDemo;
 		};
 		E86E3B4A1D32461C00615718 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E86E3B1D1D32461C00615718 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E86E3B241D32461C00615718;
-			remoteInfo = "BossHireDemo";
+			remoteInfo = BossHireDemo;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E86E3B251D32461C00615718 /* BossHireDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BossHireDemo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E86E3B251D32461C00615718 /* BossHireDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BossHireDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E86E3B291D32461C00615718 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E86E3B2B1D32461C00615718 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E86E3B2C1D32461C00615718 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -51,10 +51,10 @@
 		E86E3B341D32461C00615718 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E86E3B371D32461C00615718 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E86E3B391D32461C00615718 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E86E3B3E1D32461C00615718 /* BossHireDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BossHireDemoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E86E3B3E1D32461C00615718 /* BossHireDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BossHireDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E86E3B421D32461C00615718 /* Boss__Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Boss__Tests.m; sourceTree = "<group>"; };
 		E86E3B441D32461C00615718 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E86E3B491D32461C00615718 /* BossHireDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BossHireDemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E86E3B491D32461C00615718 /* BossHireDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BossHireDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E86E3B4D1D32461C00615718 /* Boss__UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Boss__UITests.m; sourceTree = "<group>"; };
 		E86E3B4F1D32461C00615718 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E86E3B5B1D324C5B00615718 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 				E86E3B391D32461C00615718 /* Info.plist */,
 				E86E3B281D32461C00615718 /* Supporting Files */,
 			);
-			path = "BossHireDemo";
+			path = BossHireDemo;
 			sourceTree = "<group>";
 		};
 		E86E3B281D32461C00615718 /* Supporting Files */ = {
@@ -147,7 +147,7 @@
 				E86E3B421D32461C00615718 /* Boss__Tests.m */,
 				E86E3B441D32461C00615718 /* Info.plist */,
 			);
-			path = "BossHireDemoTests";
+			path = BossHireDemoTests;
 			sourceTree = "<group>";
 		};
 		E86E3B4C1D32461C00615718 /* BossHireDemoUITests */ = {
@@ -156,7 +156,7 @@
 				E86E3B4D1D32461C00615718 /* Boss__UITests.m */,
 				E86E3B4F1D32461C00615718 /* Info.plist */,
 			);
-			path = "BossHireDemoUITests";
+			path = BossHireDemoUITests;
 			sourceTree = "<group>";
 		};
 		E8A7962E1D352C6100082413 /* View */ = {
@@ -205,8 +205,8 @@
 			);
 			dependencies = (
 			);
-			name = "BossHireDemo";
-			productName = "BossHireDemo";
+			name = BossHireDemo;
+			productName = BossHireDemo;
 			productReference = E86E3B251D32461C00615718 /* BossHireDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -223,8 +223,8 @@
 			dependencies = (
 				E86E3B401D32461C00615718 /* PBXTargetDependency */,
 			);
-			name = "BossHireDemoTests";
-			productName = "BossHireDemoTests";
+			name = BossHireDemoTests;
+			productName = BossHireDemoTests;
 			productReference = E86E3B3E1D32461C00615718 /* BossHireDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -241,8 +241,8 @@
 			dependencies = (
 				E86E3B4B1D32461C00615718 /* PBXTargetDependency */,
 			);
-			name = "BossHireDemoUITests";
-			productName = "BossHireDemoUITests";
+			name = BossHireDemoUITests;
+			productName = BossHireDemoUITests;
 			productReference = E86E3B491D32461C00615718 /* BossHireDemoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -257,6 +257,7 @@
 				TargetAttributes = {
 					E86E3B241D32461C00615718 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 5D97TFV973;
 					};
 					E86E3B3D1D32461C00615718 = {
 						CreatedOnToolsVersion = 7.3;
@@ -471,9 +472,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "BossHireDemo/Info.plist";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = BossHireDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "me.yunhui.Boss--";
+				PRODUCT_BUNDLE_IDENTIFIER = me.yunhui.BossHireDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -482,9 +484,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "BossHireDemo/Info.plist";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = BossHireDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "me.yunhui.Boss--";
+				PRODUCT_BUNDLE_IDENTIFIER = me.yunhui.BossHireDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -493,7 +496,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "BossHireDemoTests/Info.plist";
+				INFOPLIST_FILE = BossHireDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.yunhui.Boss--Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -505,7 +508,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "BossHireDemoTests/Info.plist";
+				INFOPLIST_FILE = BossHireDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.yunhui.Boss--Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -516,22 +519,22 @@
 		E86E3B591D32461C00615718 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "BossHireDemoUITests/Info.plist";
+				INFOPLIST_FILE = BossHireDemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.yunhui.Boss--UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "BossHireDemo";
+				TEST_TARGET_NAME = BossHireDemo;
 			};
 			name = Debug;
 		};
 		E86E3B5A1D32461C00615718 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "BossHireDemoUITests/Info.plist";
+				INFOPLIST_FILE = BossHireDemoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "me.yunhui.Boss--UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "BossHireDemo";
+				TEST_TARGET_NAME = BossHireDemo;
 			};
 			name = Release;
 		};

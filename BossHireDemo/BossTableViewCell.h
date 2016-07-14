@@ -10,4 +10,6 @@
 
 @interface BossTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) NSString *content;
+
 @end

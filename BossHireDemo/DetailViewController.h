@@ -10,4 +10,8 @@
 
 @interface DetailViewController : UIViewController
 
+@property (nonatomic, assign) CGRect startRect;
+@property (nonatomic, assign) NSInteger totalNum;
+@property (nonatomic, assign) NSInteger curIndex;
+
 @end
