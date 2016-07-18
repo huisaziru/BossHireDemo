@@ -16,8 +16,6 @@
 
 @end
 
-static const CGFloat BehindViewScale = 0.95;
-
 @implementation ModalTransitionAnimator
 
 
@@ -69,7 +67,7 @@ static const CGFloat BehindViewScale = 0.95;
         [UIView animateWithDuration:[self transitionDuration:transitionContext]
                          animations:^{
                              
-                             fromViewController.view.transform = CGAffineTransformScale(fromViewController.view.transform, BehindViewScale, BehindViewScale);
+                             fromViewController.view.transform = CGAffineTransformScale(fromViewController.view.transform, 0.95, 0.95);
                              
                              
                          } completion:^(BOOL finished) {
@@ -85,16 +83,14 @@ static const CGFloat BehindViewScale = 0.95;
         if (self.isDismissUp) {
             endRect.origin.y = 0;
         } else {
-            CGFloat scaleBack = (1 / BehindViewScale);
-            toViewController.view.transform = CGAffineTransformScale(toViewController.view.transform, scaleBack, scaleBack);
+            toViewController.view.transform = CGAffineTransformIdentity;
             self.coverView.alpha = 0;
         }
         [UIView animateWithDuration:[self transitionDuration:transitionContext]
                          animations:^{
                              fromViewController.view.frame = endRect;
                              if (self.isDismissUp) {
-                                 CGFloat scaleBack = (1 / BehindViewScale);
-                                 toViewController.view.transform = CGAffineTransformScale(toViewController.view.transform, scaleBack, scaleBack);
+                                 toViewController.view.transform = CGAffineTransformIdentity;
                                  self.coverView.alpha = 0;
                              }
 

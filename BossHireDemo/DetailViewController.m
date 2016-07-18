@@ -12,6 +12,7 @@
 
 const NSInteger MenuHeight = 49;
 const NSInteger InsetValue = 12;
+NSString * const GroupAnimationKey = @"groupAnimation";
 @interface DetailViewController ()<UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIView *startView;
@@ -32,11 +33,25 @@ const NSInteger InsetValue = 12;
 @property (nonatomic, strong) NSArray *modelArr;
 @property (nonatomic, assign) CGPoint lastOffset;
 
+@property (nonatomic, assign) BOOL hasCollect;
+@property (nonatomic, assign) BOOL hasChat;
+@property (nonatomic, assign) BOOL firstDidAppear;
+@property (nonatomic, strong) NSTimer *timer;
+
+/**
+ *  下面四个用于动画效果
+ */
+@property (weak, nonatomic) IBOutlet UILabel *heartLabel;
+@property (weak, nonatomic) IBOutlet UILabel *collectLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *chatImage;
+@property (weak, nonatomic) IBOutlet UILabel *chatLabel;
+
+
+
 
 @end
 
 @implementation DetailViewController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,6 +59,7 @@ const NSInteger InsetValue = 12;
     self.view.backgroundColor = [UIColor clearColor];
     self.startView = [[UIView alloc] initWithFrame:self.startRect];
     self.startView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.firstDidAppear = YES;
     [self.view addSubview:self.startView];
 }
 
@@ -52,6 +68,11 @@ const NSInteger InsetValue = 12;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    if (!self.firstDidAppear) {
+        return;
+    } else {
+        self.firstDidAppear = NO;
+    }
     [UIView animateWithDuration:0.3 animations:^{
         CGRect frame = self.view.frame;
         frame.origin.y = 0;
@@ -82,6 +103,18 @@ const NSInteger InsetValue = 12;
         [self getData];
     }];
 }
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [self clearTimer];
+}
+
+- (void)clearTimer {
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+
 - (IBAction)close:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"dismiss" object:nil userInfo:@{@"isDismissUp" : @(NO)}];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -182,10 +215,14 @@ const NSInteger InsetValue = 12;
     [self.indicatorView startAnimating];
     //请求数据时，禁止scrollView交互
     self.scrollView.userInteractionEnabled = NO;
+    [self clearTimer];
+    [self removeChatImageAnimation];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1ull *NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self.indicatorView stopAnimating];
         //模拟数据
         self.modelArr = @[@(self.curIndex), @(self.curIndex), @(self.curIndex), @(self.curIndex), @(self.curIndex)];
+        self.hasCollect = self.curIndex % 2 == 1;
+        self.hasChat = self.curIndex % 3 == 2;
         self.scrollView.userInteractionEnabled = YES;
         self.scrollView.backgroundColor = [UIColor clearColor];
         //创建内容试图，加入scrollView,只创建一次
@@ -210,6 +247,19 @@ const NSInteger InsetValue = 12;
             }
             [self setScrollViewContentOffset:CGPointMake(self.view.width, 0)];
         }
+
+        if (!self.hasChat) {
+            self.chatLabel.text = @"立即沟通";
+            //出现后一段时间才播放动画,本来想用下面dispatch_after，但是到了时间就会触发动画，不管现在runloop处于什么状态；
+            //用NSTimer这个定时器，只有runloop在default的状态时，到点才会触发指定函数，当滚动的时候，即使到了时间，也不触发，只会在default的时触发，这点和boss直聘一样；
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(playChatImageAnimation) userInfo:nil repeats:NO];
+            //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //            [self.chatImage.layer addAnimation:[self groupAnimation] forKey:GroupAnimationKey];
+            //        });
+        } else {
+            self.chatLabel.text = @"继续沟通";
+        }
+
     });
 }
 
@@ -261,8 +311,8 @@ const NSInteger InsetValue = 12;
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (scrollView.tag == 0) {
-        //tableView底部拉高100时，关闭页面
-        if (scrollView.contentOffset.y + self.tableView.height > self.tableView.contentSize.height + 100) {
+        //tableView底部拉高80时，关闭页面
+        if (scrollView.contentOffset.y + self.tableView.height > self.tableView.contentSize.height + 80) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"dismiss" object:nil userInfo:@{@"isDismissUp" : @(YES)}];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
@@ -343,5 +393,64 @@ const NSInteger InsetValue = 12;
     }
 
 }
+
+- (void)playChatImageAnimation {
+    [self.chatImage.layer addAnimation:[self groupAnimation] forKey:GroupAnimationKey];
+}
+
+- (void)removeChatImageAnimation {
+    [self.chatImage.layer removeAnimationForKey:GroupAnimationKey];
+}
+
+- (void)setHasCollect:(BOOL)hasCollect {
+    _hasCollect = hasCollect;
+    self.heartLabel.text = hasCollect ? @"♥︎" : @"♡";
+    self.heartLabel.font = hasCollect ? [UIFont fontWithName:self.heartLabel.font.fontName size:18] :[UIFont fontWithName:self.heartLabel.font.fontName size:15];
+    self.collectLabel.text = hasCollect ? @"已收藏" : @"+收藏" ;
+}
+
+- (IBAction)chat:(id)sender {
+    if (!self.hasChat) {
+        [self removeChatImageAnimation];
+    }
+    UIViewController *vc = [[UIViewController alloc] init];
+    vc.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)collect:(id)sender {
+    self.hasCollect = !self.hasCollect;
+    if (self.hasCollect) {
+        CABasicAnimation *animation = [CABasicAnimation animation];
+        animation.keyPath = @"transform.scale";
+        animation.duration = 0.1;
+        animation.fromValue = @(1.0);
+        animation.toValue = @(1.3);
+        [self.heartLabel.layer addAnimation:animation forKey:@"scale"];
+    }
+}
+
+- (CAAnimationGroup *)groupAnimation {
+    CAKeyframeAnimation *keyAnima=[CAKeyframeAnimation animation];
+    keyAnima.keyPath=@"transform.rotation";
+    keyAnima.duration=1.25 ;
+    keyAnima.values=@[@(0),@(M_PI /18),@(0),@(-M_PI /18),@(0)];
+    
+    CAKeyframeAnimation *keyAnima1=[CAKeyframeAnimation animation];
+    keyAnima1.keyPath=@"transform.scale";
+    keyAnima1.duration=1.25;
+    keyAnima1.values=@[@(1.0),@(1.1),@(1.2),@(1.3),@(1.4)];
+    
+    CAAnimationGroup *groupAnimation    = [CAAnimationGroup animation];
+    
+    groupAnimation.duration             = 1.25;
+    groupAnimation.repeatCount         = INFINITY;
+    groupAnimation.animations             = [NSArray arrayWithObjects:keyAnima,
+                                             keyAnima1,
+                                             nil];
+    groupAnimation.autoreverses = YES;
+    return groupAnimation;
+}
+
 
 @end

@@ -3,54 +3,134 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController">
+            <connections>
+                <outlet property="chatImage" destination="hxT-su-FWy" id="dF3-iu-ZFf"/>
+                <outlet property="chatLabel" destination="lBU-8L-oQU" id="oQo-r5-Xkd"/>
+                <outlet property="collectLabel" destination="3vg-fP-Vnb" id="Zd1-3B-Qzn"/>
+                <outlet property="heartLabel" destination="Xtq-GL-GFx" id="6EF-Xs-QF5"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="398" height="63"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pPv-CN-2i0">
-                    <rect key="frame" x="18" y="17" width="113" height="30"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GcL-hd-ccK">
+                    <rect key="frame" x="18" y="17" width="120" height="30"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xtq-GL-GFx">
+                            <rect key="frame" x="35" y="5.5" width="15" height="19.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="19" id="KyZ-hr-BA8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="KyZ-hr-BA8"/>
+                                </mask>
+                            </variation>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+收藏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vg-fP-Vnb">
+                            <rect key="frame" x="53" y="5" width="42.5" height="20"/>
+                            <gestureRecognizers/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <gestureRecognizers/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="113" id="lh3-2P-AMD"/>
-                        <constraint firstAttribute="height" constant="30" id="zjW-JH-ZEa"/>
+                        <constraint firstItem="3vg-fP-Vnb" firstAttribute="leading" secondItem="Xtq-GL-GFx" secondAttribute="trailing" constant="3" id="L3V-by-tET"/>
+                        <constraint firstItem="3vg-fP-Vnb" firstAttribute="centerY" secondItem="GcL-hd-ccK" secondAttribute="centerY" id="VCj-xd-kcN"/>
+                        <constraint firstItem="Xtq-GL-GFx" firstAttribute="centerY" secondItem="GcL-hd-ccK" secondAttribute="centerY" id="tO5-kh-gwr"/>
+                        <constraint firstAttribute="width" constant="120" id="vBY-dh-R14"/>
+                        <constraint firstItem="3vg-fP-Vnb" firstAttribute="leading" secondItem="GcL-hd-ccK" secondAttribute="centerX" constant="-7" id="wRC-RY-jU9"/>
+                        <constraint firstAttribute="height" constant="30" id="z0a-Ie-yXC"/>
                     </constraints>
-                    <state key="normal" title="收藏">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjt-D6-n5q">
-                    <rect key="frame" x="267" y="17" width="113" height="30"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="3OK-JF-ueQ" appends="YES" id="ARE-If-4CK"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmH-Qs-tiN">
+                    <rect key="frame" x="182" y="17" width="120" height="30"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat" translatesAutoresizingMaskIntoConstraints="NO" id="hxT-su-FWy">
+                            <rect key="frame" x="16" y="5" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="Bbw-lF-qa9"/>
+                                <constraint firstAttribute="height" constant="20" id="ly5-dq-5ZO"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="立即沟通" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBU-8L-oQU">
+                            <rect key="frame" x="44" y="5" width="64" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="64" id="LnL-Pk-PYq"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="立即沟通">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstItem="lBU-8L-oQU" firstAttribute="leading" secondItem="GmH-Qs-tiN" secondAttribute="centerX" constant="-16" id="0Qm-RG-6z5"/>
+                        <constraint firstItem="lBU-8L-oQU" firstAttribute="leading" secondItem="hxT-su-FWy" secondAttribute="trailing" constant="8" id="V8C-g3-B2m"/>
+                        <constraint firstItem="hxT-su-FWy" firstAttribute="centerY" secondItem="GmH-Qs-tiN" secondAttribute="centerY" id="t22-7s-AWN"/>
+                        <constraint firstItem="lBU-8L-oQU" firstAttribute="centerY" secondItem="GmH-Qs-tiN" secondAttribute="centerY" id="xML-IT-JSS"/>
+                    </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                </button>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="5Ob-I9-sa1" appends="YES" id="TGb-Y1-BXH"/>
+                    </connections>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="fjt-D6-n5q" firstAttribute="top" secondItem="pPv-CN-2i0" secondAttribute="top" id="3W1-Br-EQf"/>
-                <constraint firstItem="pPv-CN-2i0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="Rkg-uY-o9q"/>
-                <constraint firstItem="fjt-D6-n5q" firstAttribute="width" secondItem="pPv-CN-2i0" secondAttribute="width" id="W0t-zm-8e3"/>
-                <constraint firstAttribute="trailing" secondItem="fjt-D6-n5q" secondAttribute="trailing" constant="18" id="YZj-Xz-ER9"/>
-                <constraint firstItem="pPv-CN-2i0" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="pnU-MT-S1H"/>
-                <constraint firstItem="fjt-D6-n5q" firstAttribute="height" secondItem="pPv-CN-2i0" secondAttribute="height" id="yW9-Gf-NX9"/>
+                <constraint firstAttribute="trailing" secondItem="GmH-Qs-tiN" secondAttribute="trailing" constant="18" id="6b5-qI-o7i"/>
+                <constraint firstItem="GmH-Qs-tiN" firstAttribute="height" secondItem="GcL-hd-ccK" secondAttribute="height" id="6dX-sU-f9e"/>
+                <constraint firstItem="GcL-hd-ccK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="o82-dL-jFo"/>
+                <constraint firstItem="GcL-hd-ccK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="s8K-1Q-eL5"/>
+                <constraint firstItem="GcL-hd-ccK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tXT-Q4-whK"/>
+                <constraint firstItem="GmH-Qs-tiN" firstAttribute="top" secondItem="GcL-hd-ccK" secondAttribute="top" id="tm8-mb-eR0"/>
+                <constraint firstItem="GmH-Qs-tiN" firstAttribute="width" secondItem="GcL-hd-ccK" secondAttribute="width" id="zW6-LJ-qvr"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="s8K-1Q-eL5"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="201" y="58.5"/>
         </view>
+        <tapGestureRecognizer id="5Ob-I9-sa1">
+            <connections>
+                <action selector="chat:" destination="-1" id="jR5-6s-a3t"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="3OK-JF-ueQ">
+            <connections>
+                <action selector="collect:" destination="-1" id="lpB-4B-Ym5"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="chat" width="20" height="20"/>
+    </resources>
 </document>
