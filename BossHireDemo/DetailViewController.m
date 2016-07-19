@@ -23,7 +23,6 @@ NSString * const GroupAnimationKey = @"groupAnimation";
 @property (nonatomic, strong) UIView *contentMenuMaskView;
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIView *tableHeaderBackGroundView;
 @property (nonatomic, strong) UIView *tableFooterBackGroundView;
 
 @property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
@@ -154,11 +153,6 @@ NSString * const GroupAnimationKey = @"groupAnimation";
     //让tableview有缩进
     self.tableView.contentInset = UIEdgeInsetsMake(InsetValue, 0, 0, 0);
     
-    //tableHeaderBackGroundView作用：tableview是透明的，self.view也是透明，所以拉到顶部时，再往下拉，就会显示下面的controller,所以就是用来设置背景色，防止透明，再往下拉时，tableHeaderBackGroundView也会变大，保证完全盖住下面
-    self.tableHeaderBackGroundView = [[UIView alloc] initWithFrame:CGRectMake(0, -InsetValue, frame.size.width, InsetValue)];
-    self.tableHeaderBackGroundView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    [self.tableView addSubview:self.tableHeaderBackGroundView];
-
     //tableFooterBackGroundView作用：当tableview拉到底，再往上拉时，menuview 慢慢透出来的部分，如果底下没有view，会看到下面，所以添加此view，位置在tableview底部下面
     self.tableFooterBackGroundView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.contentSize.height, frame.size.width, MenuHeight)];
     self.tableFooterBackGroundView.backgroundColor = [UIColor whiteColor];
@@ -223,31 +217,9 @@ NSString * const GroupAnimationKey = @"groupAnimation";
         self.modelArr = @[@(self.curIndex), @(self.curIndex), @(self.curIndex), @(self.curIndex), @(self.curIndex)];
         self.hasCollect = self.curIndex % 2 == 1;
         self.hasChat = self.curIndex % 3 == 2;
-        self.scrollView.userInteractionEnabled = YES;
-        self.scrollView.backgroundColor = [UIColor clearColor];
-        //创建内容试图，加入scrollView,只创建一次
-        if (!self.contentView) {
-            self.contentView = [self createContentView];
-            [self.scrollView addSubview:self.contentView];
-        }
-        //重置contentOffset
-        self.tableView.contentOffset = CGPointMake(0, -self.tableView.contentInset.top);
-        [self.tableView reloadData];
-        
-        if (self.curIndex == 0) { //当是第一条信息时，将contentView坐标更新到第一个区域，保证不能再往右拖动
-            self.contentView.x = 0;
-            [self setScrollViewContentOffset:CGPointMake(0, 0)];
-        } else if (self.curIndex == self.totalNum - 1) { //当是最后一条信息时，将contentView坐标更新到第后一个区域，保证不能再往左拖动
-            self.contentView.x = self.view.width * 2;
-            [self setScrollViewContentOffset:CGPointMake(self.view.width * 2, 0)];
-        } else { //contentView始终在中间区域，当offset不在中间，需要设置到中间，保证可以左右拖动
-            
-            if (self.contentView.x != self.view.width) {
-                self.contentView.x = self.view.width;
-            }
-            [self setScrollViewContentOffset:CGPointMake(self.view.width, 0)];
-        }
 
+        [self updateScrollView];
+        
         if (!self.hasChat) {
             self.chatLabel.text = @"立即沟通";
             //出现后一段时间才播放动画,本来想用下面dispatch_after，但是到了时间就会触发动画，不管现在runloop处于什么状态；
@@ -261,6 +233,33 @@ NSString * const GroupAnimationKey = @"groupAnimation";
         }
 
     });
+}
+
+- (void)updateScrollView {
+    self.scrollView.userInteractionEnabled = YES;
+    //self.scrollView.backgroundColor = [UIColor clearColor];
+    //创建内容试图，加入scrollView,只创建一次
+    if (!self.contentView) {
+        self.contentView = [self createContentView];
+        [self.scrollView addSubview:self.contentView];
+    }
+    //重置contentOffset
+    self.tableView.contentOffset = CGPointMake(0, -self.tableView.contentInset.top);
+    [self.tableView reloadData];
+    
+    if (self.curIndex == 0) { //当是第一条信息时，将contentView坐标更新到第一个区域，保证不能再往右拖动
+        self.contentView.x = 0;
+        [self setScrollViewContentOffset:CGPointMake(0, 0)];
+    } else if (self.curIndex == self.totalNum - 1) { //当是最后一条信息时，将contentView坐标更新到第后一个区域，保证不能再往左拖动
+        self.contentView.x = self.view.width * 2;
+        [self setScrollViewContentOffset:CGPointMake(self.view.width * 2, 0)];
+    } else { //contentView始终在中间区域，当offset不在中间，需要设置到中间，保证可以左右拖动
+        
+        if (self.contentView.x != self.view.width) {
+            self.contentView.x = self.view.width;
+        }
+        [self setScrollViewContentOffset:CGPointMake(self.view.width, 0)];
+    }
 }
 
 /** 对tableView的contentSize 进行kvo,因为每次请求的数据不一样，conentSize不一样*/
@@ -302,13 +301,6 @@ NSString * const GroupAnimationKey = @"groupAnimation";
 
 #pragma mark - ScrollView delegate
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    if (scrollView.tag == 1) {
-        //拖动时，scrollView设置背景颜色，防止看到下面
-        self.scrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    }
-}
-
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (scrollView.tag == 0) {
         //tableView底部拉高80时，关闭页面
@@ -317,7 +309,6 @@ NSString * const GroupAnimationKey = @"groupAnimation";
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
-
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -333,9 +324,6 @@ NSString * const GroupAnimationKey = @"groupAnimation";
                 self.curIndex--;
                 [self getData];
             }
-        } else {
-            //还是当前页面时，将背景颜色去掉
-            scrollView.backgroundColor = [UIColor clearColor];
         }
     }
 }
@@ -343,8 +331,8 @@ NSString * const GroupAnimationKey = @"groupAnimation";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.contentSize.height > 0 && scrollView.tag == 0) {
-        if (scrollView.contentOffset.y + scrollView.height > scrollView.contentSize.height) {
-            
+        if (scrollView.contentOffset.y + scrollView.height > scrollView.contentSize.height) { //拉到底
+            self.scrollView.backgroundColor = [UIColor clearColor];
             CGFloat dy = scrollView.contentOffset.y + scrollView.height - scrollView.contentSize.height;
             self.contentMenuView.y = self.view.height - self.contentMenuView.height - dy;
             if (dy <= self.contentMenuView.height) {
@@ -358,6 +346,7 @@ NSString * const GroupAnimationKey = @"groupAnimation";
             }
 
         } else {
+            self.scrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
             //这个是boss直聘的bug
             //防止从底下往上拉时，突然一下下来，因为没有过渡，所以contentMenuView的坐标还在上面，所以需要重置下
             CGFloat originContentMenuY = self.view.height - self.contentMenuView.height;
@@ -366,12 +355,6 @@ NSString * const GroupAnimationKey = @"groupAnimation";
                 self.contentMenuMaskView.y = 0;
                 self.contentMenuMaskView.height = self.contentMenuView.height;
             }
-        }
-        
-        //顶部view随着往下拉变大
-        if (scrollView.contentOffset.y < 0) {
-            self.tableHeaderBackGroundView.y = scrollView.contentOffset.y;
-            self.tableHeaderBackGroundView.height = - scrollView.contentOffset.y;
         }
         
     } else if (scrollView.tag == 1) {
